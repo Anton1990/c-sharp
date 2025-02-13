@@ -1,0 +1,28 @@
+D:\Book\BOOK\C#\Courses\Udemy\Архитектура ПО Meta и SOLID принципы в ООП\SOLID-Course\training\bin\Debug\net8.0\training.exe
+D:\Book\BOOK\C#\Courses\Udemy\Архитектура ПО Meta и SOLID принципы в ООП\SOLID-Course\training\bin\Debug\net8.0\training.deps.json
+D:\Book\BOOK\C#\Courses\Udemy\Архитектура ПО Meta и SOLID принципы в ООП\SOLID-Course\training\bin\Debug\net8.0\training.runtimeconfig.json
+D:\Book\BOOK\C#\Courses\Udemy\Архитектура ПО Meta и SOLID принципы в ООП\SOLID-Course\training\bin\Debug\net8.0\training.dll
+D:\Book\BOOK\C#\Courses\Udemy\Архитектура ПО Meta и SOLID принципы в ООП\SOLID-Course\training\bin\Debug\net8.0\training.pdb
+D:\Book\BOOK\C#\Courses\Udemy\Архитектура ПО Meta и SOLID принципы в ООП\SOLID-Course\training\obj\Debug\net8.0\training.GeneratedMSBuildEditorConfig.editorconfig
+D:\Book\BOOK\C#\Courses\Udemy\Архитектура ПО Meta и SOLID принципы в ООП\SOLID-Course\training\obj\Debug\net8.0\training.AssemblyInfoInputs.cache
+D:\Book\BOOK\C#\Courses\Udemy\Архитектура ПО Meta и SOLID принципы в ООП\SOLID-Course\training\obj\Debug\net8.0\training.AssemblyInfo.cs
+D:\Book\BOOK\C#\Courses\Udemy\Архитектура ПО Meta и SOLID принципы в ООП\SOLID-Course\training\obj\Debug\net8.0\training.csproj.CoreCompileInputs.cache
+D:\Book\BOOK\C#\Courses\Udemy\Архитектура ПО Meta и SOLID принципы в ООП\SOLID-Course\training\obj\Debug\net8.0\training.dll
+D:\Book\BOOK\C#\Courses\Udemy\Архитектура ПО Meta и SOLID принципы в ООП\SOLID-Course\training\obj\Debug\net8.0\refint\training.dll
+D:\Book\BOOK\C#\Courses\Udemy\Архитектура ПО Meta и SOLID принципы в ООП\SOLID-Course\training\obj\Debug\net8.0\training.pdb
+D:\Book\BOOK\C#\Courses\Udemy\Архитектура ПО Meta и SOLID принципы в ООП\SOLID-Course\training\obj\Debug\net8.0\training.genruntimeconfig.cache
+D:\Book\BOOK\C#\Courses\Udemy\Архитектура ПО Meta и SOLID принципы в ООП\SOLID-Course\training\obj\Debug\net8.0\ref\training.dll
+D:\projects\C#\training\bin\Debug\net8.0\training.exe
+D:\projects\C#\training\bin\Debug\net8.0\training.deps.json
+D:\projects\C#\training\bin\Debug\net8.0\training.runtimeconfig.json
+D:\projects\C#\training\bin\Debug\net8.0\training.dll
+D:\projects\C#\training\bin\Debug\net8.0\training.pdb
+D:\projects\C#\training\obj\Debug\net8.0\training.GeneratedMSBuildEditorConfig.editorconfig
+D:\projects\C#\training\obj\Debug\net8.0\training.AssemblyInfoInputs.cache
+D:\projects\C#\training\obj\Debug\net8.0\training.AssemblyInfo.cs
+D:\projects\C#\training\obj\Debug\net8.0\training.csproj.CoreCompileInputs.cache
+D:\projects\C#\training\obj\Debug\net8.0\training.dll
+D:\projects\C#\training\obj\Debug\net8.0\refint\training.dll
+D:\projects\C#\training\obj\Debug\net8.0\training.pdb
+D:\projects\C#\training\obj\Debug\net8.0\training.genruntimeconfig.cache
+D:\projects\C#\training\obj\Debug\net8.0\ref\training.dll
