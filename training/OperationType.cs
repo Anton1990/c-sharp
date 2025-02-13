@@ -11,14 +11,18 @@ namespace ConsoleApp1.Model
         {
             // Initialize the dictionary with comparison operations
             Arguments = new Dictionary<string, Func<Expression, Expression, Expression>>
-            {
-                { "==", (left, right) => Expression.Equal(left, right) },
-                { "!=", (left, right) => Expression.NotEqual(left, right) },
-                { "<", (left, right) => Expression.LessThan(left, right) },
-                { ">", (left, right) => Expression.GreaterThan(left, right) },
-                { "<=", (left, right) => Expression.LessThanOrEqual(left, right) },
-                { ">=", (left, right) => Expression.GreaterThanOrEqual(left, right) }
-            };
+{
+    { "==", (left, right) => Expression.Equal(left, right) },
+    { "!=", (left, right) => Expression.NotEqual(left, right) },
+    { "<", (left, right) => Expression.LessThan(left, right) },
+    { ">", (left, right) => Expression.GreaterThan(left, right) },
+    { "<=", (left, right) => Expression.LessThanOrEqual(left, right) },
+    { ">=", (left, right) => Expression.GreaterThanOrEqual(left, right) },
+    { "StartsWith", (left, right) => Expression.Call(left, typeof(string).GetMethod("StartsWith", new[] { typeof(string) }), right) },
+    { "EndsWith", (left, right) => Expression.Call(left, typeof(string).GetMethod("EndsWith", new[] { typeof(string) }), right) },
+    { "Contains", (left, right) => Expression.Call(left, typeof(string).GetMethod("Contains", new[] { typeof(string) }), right) }
+};
+
         }
 
         public Expression ParseQuery(string query)

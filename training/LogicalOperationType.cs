@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 public class LogicalOperationType
 {
     // Separate dictionary for logical operations
-    public Dictionary<string, Func<Expression, Expression, BinaryExpression>> LogicalArguments { get; private set; }
+    public Dictionary<string, Func<Expression, Expression, Expression>> LogicalArguments { get; private set; }
 
     // Parameter expressions for left and right operands
     public ParameterExpression Left { get; private set; }
@@ -16,7 +16,7 @@ public class LogicalOperationType
     public LogicalOperationType()
     {
         // Initialize the dictionary with logical operations
-        LogicalArguments = new Dictionary<string, Func<Expression, Expression, BinaryExpression>>
+        LogicalArguments = new Dictionary<string, Func<Expression, Expression, Expression>>
         {
             { "AND", Expression.And }, // Logical AND
             { "OR",  Expression.Or }   // Logical OR
@@ -41,19 +41,19 @@ public class LogicalOperationType
         }
     }
 
-    public Expression GenerateLogicalTreeExpression(IEnumerable<Expression> expressions)
+    public Expression<Func<T, bool>> GenerateLogicalTreeExpression<T>(IEnumerable<Expression> expressions, ParameterExpression parameter)
     {
-
         var list = expressions.ToList();
 
         while (list.Any(x => x.NodeType == ExpressionType.And))
-        { 
-        List<int> indices = list
-            .Select((x, index) => new { Expression = x, Index = index }) // Get both the element and its index
-            .Where(x => x.Expression.NodeType == ExpressionType.And) // Filter based on the condition
-            .Select(x => x.Index) // Extract the indices
-            .ToList();
-            var left = list.ElementAt(indices.First()-1);
+        {
+            List<int> indices = list
+                .Select((x, index) => new { Expression = x, Index = index })
+                .Where(x => x.Expression.NodeType == ExpressionType.And)
+                .Select(x => x.Index)
+                .ToList();
+
+            var left = list.ElementAt(indices.First() - 1);
             var right = list.ElementAt(indices.First() + 1);
             var expression = Expression.AndAlso(left, right);
             list[indices.First()] = expression;
@@ -61,28 +61,33 @@ public class LogicalOperationType
             list.RemoveAt(indices.First());
         }
 
-
         Stack<Expression> stack = new Stack<Expression>();
         foreach (Expression expression in list.AsEnumerable().Reverse())
         {
             stack.Push(expression);
         }
-        while(stack.Count > 2)
+
+        while (stack.Count > 2)
         {
             var left = stack.Pop();
             var expression = stack.Pop();
             var right = stack.Pop();
-            if(expression.NodeType == ExpressionType.Or) 
+
+            if (expression.NodeType == ExpressionType.Or)
             {
-                expression = Expression.Or(left, right);
+                expression = Expression.OrElse(left, right);
             }
-            if (expression.NodeType == ExpressionType.And)
+            else if (expression.NodeType == ExpressionType.And)
             {
-                expression = Expression.And(left, right);
+                expression = Expression.AndAlso(left, right);
             }
+
             stack.Push(expression);
         }
-        return stack.Pop();
+
+        var finalExpression = stack.Pop();
+        return Expression.Lambda<Func<T, bool>>(finalExpression, parameter);
     }
+
 
 }
