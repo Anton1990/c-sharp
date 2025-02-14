@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace ConsoleApp1.Model
 {
@@ -53,21 +54,37 @@ namespace ConsoleApp1.Model
             string leftOperand = parts[0].Trim();
             string rightOperand = parts[1].Trim();
 
-            var propertyInfo = typeof(T).GetProperty(leftOperand);
+            // Handle nested properties like "Role.Name"
+            PropertyInfo propertyInfo = null;
+            Type currentType = typeof(T);
+            Expression propertyExpression = parameter; // Start with the parameter expression
+
+            foreach (var propertyName in leftOperand.Split('.'))
+            {
+                propertyInfo = currentType.GetProperty(propertyName);
+                if (propertyInfo == null)
+                {
+                    throw new ArgumentException($"Property '{leftOperand}' does not exist on type '{typeof(T).Name}'.");
+                }
+
+                // Build the nested property expression
+                propertyExpression = Expression.Property(propertyExpression, propertyInfo);
+                currentType = propertyInfo.PropertyType; // Move to the next nested type
+            }
+
             if (propertyInfo == null)
             {
                 throw new ArgumentException($"Property '{leftOperand}' does not exist on type '{typeof(T).Name}'.");
             }
 
-            var property = Expression.Property(parameter, propertyInfo);
-
-            // Ensure the right operand is parsed correctly for string-based operations
-            object parsedValue = propertyInfo.PropertyType == typeof(string) ? rightOperand : Convert.ChangeType(rightOperand, propertyInfo.PropertyType);
+            // Ensure the right operand is parsed correctly for its type
+            object parsedValue = Convert.ChangeType(rightOperand, propertyInfo.PropertyType);
             var right = Expression.Constant(parsedValue, propertyInfo.PropertyType);
 
+            // Continue with your existing logic
             if (Arguments.TryGetValue(operatorSymbol, out var operation))
             {
-                return operation(property, right);
+                return operation(propertyExpression, right);
             }
 
             throw new NotSupportedException($"Operator '{operatorSymbol}' is not supported.");

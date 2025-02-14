@@ -18,6 +18,8 @@ public class Asset
     public string Location { get; set; }
     public int Age { get; set; }
     public float Age1 { get; set; }
+
+    public Role Role { get; set; }
 }
 
 
@@ -37,16 +39,16 @@ public class Program
 
         List<Asset> assets = new List<Asset>
     {
-        new Asset { Location = "New York", Age = 5, Age1 = 5.5f },
-        new Asset { Location = "Los Angeles", Age = 10, Age1 = 10.2f },
-        new Asset { Location = "Chicago", Age = 3, Age1 = 3.7f }
+        new Asset { Location = "New York", Age = 5, Age1 = 5.5f, Role=new Role { Name = "Alice1", Age = 25, Age1 = 25.5f } },
+        new Asset { Location = "Los Angeles", Age = 10, Age1 = 10.2f,  Role=new Role { Name = "Alice1", Age = 25, Age1 = 25.5f }},
+        new Asset { Location = "Chicago", Age = 3, Age1 = 3.7f, Role=new Role { Name = "Alice3", Age = 25, Age1 = 25.5f } }
     };
 
         var logicalType = new LogicalOperationType();
         var operationType = new OperationType();
         var generalOperation = new GeneralOperationType();
 
-        var query = "LocationContainsC OR LocationContainsl";
+        var query = "Role.Name==Alice1";
         var tokens = Tokenize(query);
 
         var parameter = Expression.Parameter(typeof(Asset), "x"); // Single parameter for all expressions
